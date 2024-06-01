@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "729488646624",
+    "project_id": "all-n-do",
+    "storage_bucket": "all-n-do.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:729488646624:android:29a18d128c1f169a19cb85",
+        "android_client_info": {
+          "package_name": "com.example.allndo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpQi7cX7tHhXJS9PkwFVfvCduWceETUB0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
