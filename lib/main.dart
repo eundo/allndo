@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'onedrive_api.dart';
+import 'account_page.dart';
+import 'search_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,60 +14,32 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SearchPage(),
+      home: HomePage(),
+      routes: {
+        '/account': (context) => AccountPage(),
+        '/search': (context) => SearchPage(),
+      },
     );
   }
 }
 
-class SearchPage extends StatefulWidget {
-  @override
-  _SearchPageState createState() => _SearchPageState();
-}
-
-class _SearchPageState extends State<SearchPage> {
-  final TextEditingController _controller = TextEditingController();
-  final FlutterSecureStorage secureStorage = FlutterSecureStorage();
-  OneDriveApi oneDriveApi = OneDriveApi();
-  String _results = '';
-
-  @override
-  void initState() {
-    super.initState();
-    oneDriveApi.authenticate();
-  }
-
-  Future<void> _search(String query) async {
-    List<String> results = [];
-
-    List<String> onedriveResults = await oneDriveApi.searchFiles(query);
-    results.addAll(onedriveResults);
-
-    setState(() {
-      _results = results.join(', ');
-    });
-  }
-
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Cloud Storage Search'),
-      ),
-      body: Column(
-        children: <Widget>[
-          TextField(
-            controller: _controller,
-            decoration: InputDecoration(hintText: 'Enter search query'),
-            onSubmitted: (value) {
-              _search(value);
+        actions: [
+          IconButton(
+            icon: Icon(Icons.account_circle),
+            onPressed: () {
+              Navigator.pushNamed(context, '/account');
             },
           ),
-          Expanded(
-            child: Center(
-              child: Text(_results),
-            ),
-          ),
         ],
+      ),
+      body: Center(
+        child: Text('Welcome to Cloud Storage Search'),
       ),
     );
   }
