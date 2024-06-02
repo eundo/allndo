@@ -7,8 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 class OneDriveApi {
   final String clientId = 'e997f8ec-b296-4c0c-9e92-0ce598941979';
   final String clientSecret = 'd17d0274-2b48-4b5c-a3b0-2bf9d721de91';
-  final String redirectUri =
-      'https://<your_app>.firebaseapp.com/__/auth/handler'; // Firebase 호스팅 URL로 설정
+  final String redirectUri = 'http://localhost:8011'; // 특정 포트 설정
   final String tenantId = 'f0b6221d-a098-496e-a398-13608e6eb8bb';
   final FlutterSecureStorage secureStorage = FlutterSecureStorage();
 
@@ -70,11 +69,8 @@ class OneDriveApi {
   }
 
   Future<String?> _getAuthCodeFromFirebase() async {
-    // Firebase Functions 또는 다른 방법으로 인증 코드를 받아오는 로직 구현
-    // 여기서는 예시로, Firebase Firestore에 저장된 코드를 가져오는 방법을 설명합니다.
-    // 실제 구현 시에는 Firebase Functions로 인증 코드 처리 및 저장하는 로직을 구현하세요.
-    final response = await http
-        .get(Uri.parse('https://<your_app>.firebaseapp.com/getAuthCode'));
+    final response = await http.get(Uri.parse(
+        'https://us-central1-all-n-do.cloudfunctions.net/getAuthCode?code=YOUR_CODE'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return data['code'];
